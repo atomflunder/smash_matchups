@@ -119,7 +119,7 @@ async function writeOutput(matchupMap: Map<string, Matchup>) {
         (a, b) =>
             Math.abs(b[1].percentage - 0.5) - Math.abs(a[1].percentage - 0.5)
     )) {
-        const { char1, char2, winsChar1, winsChar2, percentage } = entry[1];
+        const { char1, char2, winsChar1, winsChar2 } = entry[1];
 
         const totalGames = winsChar1 + winsChar2;
 
@@ -140,7 +140,7 @@ async function writeOutput(matchupMap: Map<string, Matchup>) {
             loserWins = winsChar1;
         }
 
-        const winPercent = percentage * 100;
+        const winPercent = (winnerWins / (winnerWins + loserWins)) * 100;
         const losePercent = 100 - winPercent;
 
         str += `${winner},${loser},${winnerWins},${loserWins},${totalGames},${winPercent.toFixed(
